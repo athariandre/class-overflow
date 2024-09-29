@@ -11,7 +11,7 @@ options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
-def getInfo(department, number, professor):
+def getAverageGPA(department, number, professor):
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     url = f"https://anex.us/grades/?dept={department}&number={number}"
     driver.get(url)
