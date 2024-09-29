@@ -111,11 +111,13 @@ html, body {
 /* FORM BUTTON CONTAINER */
 .Form .button-container {
     display: flex;
-    justify-content: center; /* Center the submit and reset buttons */
-    margin-top: 20px; /* Add space above the buttons */
+    justify-content: center; /* Center the submit button */
+    margin-top: 20px; /* Add space above the submit button */
 }
 
 .Form .button-container button {
+    background-color: #8B4513;
+    color: #ffffff;
     padding: 10px 20px;
     font-size: 1.2rem;
     border: none;
@@ -124,27 +126,9 @@ html, body {
     transition: all 0.3s ease;
 }
 
-/* Enhanced Reset Button */
-.Form .button-container .reset-button {
-    background-color: #ff6b6b; /* Red background for reset */
-    color: #ffffff; /* White text */
-    border: none;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    margin-left: 10px; /* Spacing between submit and reset buttons */
-    border-radius: 5px;
-    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
-    transition: all 0.3s ease; /* Smooth transition */
-}
-
-.Form .button-container .reset-button:hover {
-    background-color: #ff4040; /* Darker red on hover */
+.Form .button-container button:hover {
+    background-color: #d39e58; /* Lighter brown for hover */
     transform: scale(1.05); /* Slight scale on hover */
-}
-
-.Form .button-container .reset-button:active {
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4); /* Change shadow on click */
-    transform: translateY(2px); /* Slight shift down */
 }
 
 /* INPUT FOCUS STATES */
@@ -184,7 +168,62 @@ input[type="text"]:focus {
     }
 }
 
-/* Scrollable container */
+/* SUMMARY BOX STYLES */
+.result {
+    text-align: center;
+    margin: 20px auto;
+}
+
+/* Percentage Box */
+/* Percentage Box */
+/* Percentage Box */
+.percentage-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #b48461, #987b55); /* Gradient matching the background */
+    color: #ffffff; /* White text for better contrast */
+    padding: 25px;
+    margin: 20px auto;
+    border-radius: 30px; /* More rounded corners */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow for depth */
+    width: 75%; /* Make the box width 75% */
+    max-width: 600px;
+    text-align: center;
+    font-size: 1.8rem; /* Increase font size */
+    font-weight: bold; /* Emphasize the text */
+}
+
+/* Percentage Bar Container */
+.percentage-bar-container {
+    width: 75%; /* Width set to 75% of the screen */
+    margin: 20px auto;
+    background-color: #d1b99a; /* A lighter tone complementing the percentage box */
+    border-radius: 25px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center; /* Center the percentage bar content */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Percentage Bar */
+.percentage-bar {
+    height: 30px; /* Increased height for visibility */
+    background: linear-gradient(90deg, #d39e58, #b48461); /* Gradient from lighter brown to darker brown */
+    color: #ffffff;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center the text vertically */
+    line-height: 30px;
+    border-radius: 25px;
+    transition: width 0.5s ease;
+    font-weight: bold; /* Bold text */
+    font-size: 1.2rem; /* Larger font for readability */
+}
+
+
+/* Scrollable class summary */
 .class-summary-container {
     display: flex;
     flex-direction: column; /* Vertically stacked */
@@ -198,7 +237,7 @@ input[type="text"]:focus {
     background-color: #f4f4f4; /* Light background color */
 }
 
-/* Add some scroll effects */
+/* Scroll bar customization */
 .class-summary-container::-webkit-scrollbar {
     width: 8px;
 }
@@ -244,91 +283,4 @@ input[type="text"]:focus {
 
 .class-summary-box {
     animation: fadeInUp 0.5s ease;
-}
-.result {
-    text-align: center;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 80vh; /* Adjust height for centering */
-}
-
-.result h2 {
-    font-size: 3rem;
-    color: #fff;
-    background: linear-gradient(135deg, #d39e58, #72380f); /* Gradient background */
-    padding: 20px 40px;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    margin-bottom: 20px;
-    animation: bounce 1s infinite; /* Add a bounce effect */
-}
-
-.result h3 {
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 1.8rem;
-}
-
-.percentage-box {
-    font-size: 5rem;
-    font-weight: bold;
-    background: linear-gradient(135deg, #8B4513, #D1B99A); /* Gradient for percentage box */
-    color: #fff;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    transition: transform 0.5s ease;
-}
-
-.percentage-box:hover {
-    transform: scale(1.1); /* Slight zoom on hover */
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-.percentage-box {
-    font-size: 2.5rem;
-    font-weight: bold;
-    background: linear-gradient(135deg, #8B4513, #D1B99A);
-    color: #fff;
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    transition: transform 0.5s ease;
-    margin-bottom: 20px;
-    width: 75%; /* Make the box width 75% of the screen */
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.percentage-bar-container {
-    width: 75%; /* Make the container 75% of the screen */
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #ddd;
-    border-radius: 20px;
-    overflow: hidden;
-    margin: 20px 0;
-}
-
-.percentage-bar {
-    height: 30px;
-    background-color: #ff4500;
-    text-align: center;
-    color: white;
-    line-height: 30px;
-    font-weight: bold;
-    border-radius: 20px;
-    transition: width 0.3s ease;
 }

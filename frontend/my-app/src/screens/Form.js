@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './Form.css';
 
 const Form = () => {
-    // Retrieve saved classes from localStorage or default to 1 class
     const initialClasses = JSON.parse(localStorage.getItem('classes')) || [{ department: '', number: '', teacher: '' }];
     const initialNumClasses = initialClasses.length;
 
     const [numClasses, setNumClasses] = useState(initialNumClasses);
     const [classes, setClasses] = useState(initialClasses);
     const [isSubmitDisabled, setSubmitDisabled] = useState(true);
-    const [isSubmitted, setIsSubmitted] = useState(false); // New state to track if the form is submitted
-    const [screwedPercentage, setScrewedPercentage] = useState(70); // Default fixed percentage value
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [screwedPercentage, setScrewedPercentage] = useState(70);
 
     useEffect(() => {
         const areAnyInputsEmpty = numClasses === 0 || classes.some(classItem => !classItem.department || !classItem.number || !classItem.teacher);
@@ -36,15 +35,12 @@ const Form = () => {
         const newClasses = [...classes];
 
         if (field === 'department') {
-            // Limit department to 4 characters
             newClasses[index][field] = value.slice(0, 4);
         } else if (field === 'number') {
-            // Allow only numbers and restrict to 3 digits
             if (/^\d{0,3}$/.test(value)) {
                 newClasses[index][field] = value;
             }
         } else if (field === 'teacher') {
-            // Ensure teacher's name is a single word (last name)
             if (!/\s/.test(value)) {
                 newClasses[index][field] = value;
             }
@@ -54,8 +50,6 @@ const Form = () => {
     };
 
     const handleSubmit = () => {
-        // Simulate an API call here in the future
-        // For now, set form as submitted
         setIsSubmitted(true);
     };
 
@@ -66,7 +60,6 @@ const Form = () => {
         setIsSubmitted(false);
     };
 
-    // Conditionally render form or result
     if (isSubmitted) {
         return (
             <div className="result">
@@ -74,7 +67,6 @@ const Form = () => {
                     <h2>You are {screwedPercentage}% SCREWED!</h2>
                 </div>
 
-                {/* Percentage Bar */}
                 <div className="percentage-bar-container">
                     <div className="percentage-bar" style={{ width: `${screwedPercentage}%` }}>
                         {screwedPercentage}%
@@ -89,7 +81,7 @@ const Form = () => {
                             <p><strong>Department:</strong> {classItem.department}</p>
                             <p><strong>Number:</strong> {classItem.number}</p>
                             <p><strong>Teacher:</strong> {classItem.teacher}</p>
-                            <p><strong>Difficulty Rating:</strong> {Math.floor(Math.random() * 100)}% (this will be fetched from API)</p>
+                            <p><strong>Difficulty Rating:</strong> {Math.floor(Math.random() * 100)}%</p>
                         </div>
                     ))}
                 </div>

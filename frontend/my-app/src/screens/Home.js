@@ -19,6 +19,12 @@ const styles = {
     textShadow: '3px 3px 8px rgba(0, 0, 0, 0.6)', // Enhanced shadow effect
     letterSpacing: '1px',
   },
+  classText: {
+    fontWeight: 'normal', // Normal weight for "class"
+  },
+  overflowText: {
+    fontWeight: 'bold', // Bold for "overflow"
+  },
   paragraph: {
     fontSize: '1.5rem',
     color: '#e0e0e0',
@@ -49,7 +55,10 @@ const Home = () => {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.header}>how screwed am i?</h1>
+      <h1 style={styles.header}>
+        <span style={styles.classText}>class </span>
+        <span style={styles.overflowText}>overf10w</span>
+      </h1>
       <p style={styles.paragraph}>
         We’re here to help you experience the best of our platform with innovative technology and an incredible user experience.
       </p>
