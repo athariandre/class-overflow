@@ -1,4 +1,4 @@
-# { class overflow } a HowdyHack 2024 project
+# { class overflow },  a HowdyHack 2024 project
 Howdy! Welcome to our HowdyHack submission! Our app will be hosted soon so check back for updates.
 
 ## Inspiration
