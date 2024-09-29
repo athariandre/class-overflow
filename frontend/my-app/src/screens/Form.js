@@ -12,6 +12,7 @@ const Form = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isLoading, setIsLoading] = useState(false); // New state for loading
     const [results, setResults] = useState([]);
+    const [averageScrewPercentage, setAverageScrewPercentage] = useState(0); // New state for average screw percentage
 
     useEffect(() => {
         const areAnyInputsEmpty = numClasses === 0 || classes.some(classItem => !classItem.department || !classItem.course_code || !classItem.professor_name);
@@ -35,7 +36,20 @@ const Form = () => {
 
     const handleInputChange = (index, field, value) => {
         const newClasses = [...classes];
-        newClasses[index][field] = value;
+        if (field === 'department') {
+            // Limit to 4 characters for department
+            newClasses[index][field] = value.slice(0, 4);
+        } else if (field === 'course_code') {
+            // Limit to 3 digits for course code
+            if (/^\d{0,3}$/.test(value)) {
+                newClasses[index][field] = value;
+            }
+        } else if (field === 'professor_name') {
+            // No spaces allowed in professor name
+            if (!/\s/.test(value)) {
+                newClasses[index][field] = value;
+            }
+        }
         setClasses(newClasses);
     };
 
@@ -56,6 +70,8 @@ const Form = () => {
                 console.log('Received data:', data);  // Debug: Log received data
                 setResults(data);
                 setIsSubmitted(true);
+                const averageScrew = data.reduce((total, course) => total + course.screw_percentage, 0) / data.length;
+                setAverageScrewPercentage(averageScrew); // Calculate and set average screw percentage
             } else {
                 console.error('Failed to fetch course info', response.statusText);  // Log error message
             }
@@ -74,6 +90,7 @@ const Form = () => {
         setIsSubmitted(false);
         setResults([]);
         setIsLoading(false); // Reset loading state
+        setAverageScrewPercentage(0); // Reset screw percentage
     };
 
     // Loading screen UI
@@ -89,6 +106,11 @@ const Form = () => {
     if (isSubmitted) {
         return (
             <div className="result">
+                {/* Big message showing screw percentage */}
+                <div className="screwed-message">
+                    <h2>You are {averageScrewPercentage.toFixed(2)}% SCREWED!</h2>
+                </div>
+
                 <h2>Results</h2>
                 <div className="class-summary-grid">
                     {results.map((result, index) => (
