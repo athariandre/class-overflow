@@ -24,11 +24,16 @@ def get_course_info():
         department = course['department']
         course_code = course['course_code']
         professor_name = course['professor_name']
-
-        [profGPA, exGPA] = getAverageGPA(department, int(course_code))
-        [RMP_rating, RMP_would_take_again, RMP_difficulty] = get_professor_stats(professor_name)
-        RMP_would_take_again = int(RMP_would_take_again[1:])
-        RMP_difficulty = float(RMP_difficulty)
+        try:
+            [profGPA, exGPA] = getAverageGPA(department, int(course_code), professor_name)
+            [RMP_rating, RMP_would_take_again, RMP_difficulty] = get_professor_stats(professor_name)
+        except:
+            out={
+                "status": 500,
+                "body": "There is an issue with the user-submitted data"
+            }
+        RMP_would_take_again = int(RMP_would_take_again[:2])
+        RMP_difficulty = float(RMP_difficulty[:2])
         RMP_rating = float(RMP_rating)
         profGPA = float(profGPA)
         exGPA = float(exGPA)
@@ -50,13 +55,12 @@ def get_course_info():
 
         class_reddit_scrape(department, course_code)
         # Load the object from the pickle file
-        obj = pickle.load(open("post_bodies.pkl", "rb"))
         
-        with open('backend/post_bodies.pkl', 'rb') as f:
+        with open('post_bodies.pkl', 'rb') as f:
             data = pickle.load(f)
         string_data = json.dumps(data)
         
-        csv_file_path = 'backend/filtered_reddit_posts.csv'
+        csv_file_path = 'filtered_reddit_posts.csv'
 
         with open(csv_file_path, 'r') as csv_file:
             csv_reader = csv.reader(csv_file)
@@ -76,7 +80,7 @@ def get_course_info():
         }
     ]
 )
-        reddit_summary = completion.choices[0].message
+        reddit_summary = completion.choices[0].message.content
         screwage = classDiffScore + profDiffScore
 
         results.append({

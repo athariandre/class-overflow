@@ -3,10 +3,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
+import time
 
 def get_professor_stats(professor_name):
     # Initialize the WebDriver (Make sure to replace with the path to your WebDriver if necessary)
-    driver = webdriver.Chrome()
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless=new")
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(options=options)
 
     try:
         base_url = "https://www.ratemyprofessors.com/search/professors/1003?q={}"
@@ -16,9 +22,7 @@ def get_professor_stats(professor_name):
         driver.get(search_url)
 
         # Wait until the page loads and the first professor link is visible
-        WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located((By.CLASS_NAME, 'TeacherCard__StyledTeacherCard-syjs0d-0'))
-        )
+        time.sleep(10)
 
         # Get the page source and parse it with BeautifulSoup
         soup = BeautifulSoup(driver.page_source, 'html.parser')
