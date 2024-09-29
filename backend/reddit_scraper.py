@@ -49,7 +49,7 @@ def class_reddit_scrape(class_category, class_number):
     def check_and_write_submission(submission, writer, class_category, class_number):
         body_text = submission.selftext.lower()
         
-        if class_category.lower() in body_text and class_number.lower() in body_text:
+        if class_category.lower() in body_text and str(class_number) in body_text:
             writer.writerow([
                 submission.title,
                 submission.score,
@@ -85,3 +85,4 @@ def class_reddit_scrape(class_category, class_number):
         print("This might be due to rate limiting or authentication issues.")
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
+

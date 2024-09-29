@@ -72,7 +72,7 @@ def get_professor_stats(professor_name):
         # All necessary information has been retrieved, quit the driver
         driver.quit()
 
-        return f"Professor {professor_name} has a quality rating of {quality1}, would take again percentage of {would_take_again1}, and a level of difficulty of {difficulty1}."
+        return [quality1, would_take_again1, difficulty1]
 
     except Exception as e:
         print(f"An error occurred: {e}")
