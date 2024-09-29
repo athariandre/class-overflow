@@ -11,14 +11,10 @@ function App() {
       <nav className="Navbar">
         <ul className="app-nav-list">
           <li className="app-nav-item">
-            <Link to="/" className="app-nav-link">
-              <button className="nav-button">Home</button>
-            </Link>
+            <Link to="/" className="app-nav-link">Home</Link>
           </li>
           <li className="app-nav-item">
-            <Link to="/form" className="app-nav-link">
-              <button className="nav-button">Form</button>
-            </Link>
+            <Link to="/form" className="app-nav-link">Form</Link>
           </li>
         </ul>
       </nav>

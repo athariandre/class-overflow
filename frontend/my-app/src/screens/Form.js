@@ -5,6 +5,8 @@ const Form = () => {
     const [numClasses, setNumClasses] = useState(0);
     const [classes, setClasses] = useState([]);
     const [isSubmitDisabled, setSubmitDisabled] = useState(true);
+    const [isSubmitted, setIsSubmitted] = useState(false); // New state to track if the form is submitted
+    const [screwedPercentage, setScrewedPercentage] = useState(70); // Default fixed percentage value
 
     useEffect(() => {
         const areAnyInputsEmpty = numClasses === 0 || classes.some(classItem => !classItem.department || !classItem.number || !classItem.teacher);
@@ -30,10 +32,31 @@ const Form = () => {
     };
 
     const handleSubmit = () => {
-        // Perform submit logic here
-        console.log('Form submitted:', classes);
-        // Redirect to the next page or perform any other action
+        // Simulate an API call here in the future
+        // For now, set form as submitted
+        setIsSubmitted(true);
     };
+
+    // Conditionally render form or result
+    if (isSubmitted) {
+        return (
+            <div className="result">
+                <h2>You are {screwedPercentage}% SCREWED!</h2>
+                <h3>Class Details:</h3>
+                <ul>
+                    {classes.map((classItem, index) => (
+                        <li key={index}>
+                            <h4>Class {index + 1}</h4>
+                            <p><strong>Department:</strong> {classItem.department}</p>
+                            <p><strong>Number:</strong> {classItem.number}</p>
+                            <p><strong>Teacher:</strong> {classItem.teacher}</p>
+                            <p><strong>Difficulty Rating:</strong> {Math.floor(Math.random() * 100)}% (this will be fetched from API)</p> {/* For now, it's a random value */}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        );
+    }
 
     return (
         <div className="Form">
