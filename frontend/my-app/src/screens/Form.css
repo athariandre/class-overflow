@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Rye&display=swap');
+
+html, body {
+    height: 100%; /* Cover the full height */
+    margin: 0; /* Remove default margin */
+    background-color: #987b55; /* Overall page background color */
+    font-family: 'Rye', serif; /* Optional: change the default font */
+}
+
+.Form {
+    width: 100%;
+    max-width: 600px; /* Maximum width for the form */
+    margin: 0 auto; /* Center the form */
+    padding: 20px; /* Padding inside the form */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    background: linear-gradient(45deg, #d39e58, #72380f);
+    border-radius: 30px; /* Rounded corners */
+}
+
+.Form h2 {
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Spacing below the heading */
+    color: #ffffff;
+}
+
+.Form div {
+    display: flex; /* Flexbox for button and input alignment */
+    justify-content: center; /* Center content */
+    margin-bottom: 20px; /* Spacing below each input group */
+}
+
+.Form button {
+    width: 40px; /* Increased button width for better usability */
+    height: 40px; /* Increased button height for better usability */
+    margin: 0 10px; /* Space between buttons */
+    border: 2px solid; /* Border around the buttons */
+    border-radius: 5px; /* Rounded button corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: border-color 0.3s; /* Smooth border color transition */
+}
+
+/* Specific styles for add and subtract buttons */
+.Form .add-button, .Form .subtract-button {
+    /* ... */
+    border: 2px solid #8B4513; /* Saddle Brown */
+    background-color: #D1B99A; /* Light sandy color */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Add some shadow for a 3D effect */
+    transition: all 0.3s; /* Smooth transition for all changes */
+}
+
+.Form input[type="text"] {
+    width: 50px; /* Width for the number of classes input */
+    text-align: center; /* Center text in input */
+    margin: 0 5px; /* Space around the input */
+}
+
+.Form table {
+    width: 100%; /* Full width for the table */
+    border-collapse: collapse; /* Collapse borders for a cleaner look */
+}
+
+.Form th, .Form td {
+    border: 1px solid #ddd; /* Light border for table cells */
+    padding: 8px; /* Padding inside table cells */
+    text-align: left; /* Left-align text in table cells */
+}
+
+/* Change the color of the buttons on active (clicked) state */
+.Form .add-button:hover, .Form .subtract-button:hover {
+    /* Darken the button a bit when hovered */
+    background-color: #8B4513; /* Saddle Brown */
+    color: #D1B99A; /* Light sandy color */
+}
+
+.Form .add-button:active, .Form .subtract-button:active {
+    /* Push the button down a bit when clicked */
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    transform: translate(1px, 1px);
+}
+
+.Form th {
+    background-color: #8B4513;
+    color: #ffffff; /* Header background color */
+}
+
+/* Responsive input fields for class info */
+.Form input[type="text"] {
+    width: 100%; /* Full width for input fields */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+input {
+    background-color: transparent;
+    border: 1px solid #000;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4A90E2;
+    box-shadow: 0 0 10px #4A90E2;
+}
+
+@keyframes rowFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.Form tr {
+    animation: rowFadeIn 0.5s ease;
+}
