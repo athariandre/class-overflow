@@ -62,6 +62,34 @@ const Form = () => {
     };
 
     if (isSubmitted) {
+        useEffect(() => {
+            const fetchScrewedPercentage = async () => {
+                try {
+                    const response = await fetch('http://127.0.0.1:5000/course_info', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ classes }),
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        setScrewedPercentage(data.screwedPercentage);
+                    } else {
+                        console.error('Failed to fetch screwed percentage');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            };
+
+            fetchScrewedPercentage();
+        }, [classes]);
+
+
+
+
         return (
             <div className="result">
                 <div className="percentage-box">

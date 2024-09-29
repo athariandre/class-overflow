@@ -72,7 +72,7 @@ def get_course_info():
             {"role": "system", "content": "You are an assistant tasked with summarizing/cleaning data given to you and answering any prompts that may preface the data. You are specifically meant to identify any common issues that can be seen repeated throughout the posts"},
         {
             "role": "user",
-            "content": f"Using the following data, create a short (less than 150 word) summary about the {department} {course_code}. Specifically mention the difficulty of the course and whatever issues appeared frequently throughout the different texts: " (string_data + csv_string)
+            "content": f"Using the following data, create a short (less than 150 word) summary about {department} {course_code}. Specifically mention the difficulty of the course and whatever issues appeared frequently throughout the different texts: {(string_data + csv_string)}"
         }
     ]
 )
