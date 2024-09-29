@@ -88,3 +88,24 @@ html, body {
     width: 100%; /* Full width for input fields */
     box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
+
+input {
+    background-color: transparent;
+    border: 1px solid #000;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4A90E2;
+    box-shadow: 0 0 10px #4A90E2;
+}
+
+@keyframes rowFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.Form tr {
+    animation: rowFadeIn 0.5s ease;
+}
