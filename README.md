@@ -1,4 +1,4 @@
-#HowdyHack 2024
+# HowdyHack 2024
 Howdy! Welcome to our HowdyHack submission! Our app will be hosted soon so check back for updates.
 
 ## Inspiration
