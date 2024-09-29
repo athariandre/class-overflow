@@ -62,7 +62,7 @@ const Form = () => {
         setIsSubmitted(true);
         console.log('Submitted:', JSON.stringify(classes));
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/course_info', {
+            const response = await fetch('http://127.0.0.1:8000/api/course_info', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

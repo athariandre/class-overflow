@@ -54,7 +54,7 @@ def get_course_info():
         w3 = 0.15
         w4 = 0.3
 
-        class_diff_score = (w1*(1 - (exGPA / 4)) + w2*(1 - (RMP_rating / 5.0)) + w3*(1-(RMP_would_take_again / 100.0)) + w4*(RMP_difficulty / 5.0)) * 100 + 32
+        class_diff_score = (w1*(4-exGPA) / 4.0) + w2*(1 - (RMP_rating / 5.0)) + w3*(1-(RMP_would_take_again / 100.0)) + w4*(RMP_difficulty / 5.0)
         prof_diff_index = 1 - ((profGPA - exGPA) / (exGPA)) # ex. profGPA 4 exGPA 3 diffIdx = 0.75 so 75% as hard
         screwage = (class_diff_score * prof_diff_index)
 
