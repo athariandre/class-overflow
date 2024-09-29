@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import './Form.css';
 
 const Form = () => {
-    const [numClasses, setNumClasses] = useState(1); // Default to 1 class
-    const [classes, setClasses] = useState([{ department: '', number: '', teacher: '' }]); // Default to 1 empty class object
+    // Retrieve saved classes from localStorage or default to 1 class
+    const initialClasses = JSON.parse(localStorage.getItem('classes')) || [{ department: '', number: '', teacher: '' }];
+    const initialNumClasses = initialClasses.length;
+
+    const [numClasses, setNumClasses] = useState(initialNumClasses);
+    const [classes, setClasses] = useState(initialClasses);
     const [isSubmitDisabled, setSubmitDisabled] = useState(true);
     const [isSubmitted, setIsSubmitted] = useState(false); // New state to track if the form is submitted
     const [screwedPercentage, setScrewedPercentage] = useState(70); // Default fixed percentage value
@@ -11,6 +15,9 @@ const Form = () => {
     useEffect(() => {
         const areAnyInputsEmpty = numClasses === 0 || classes.some(classItem => !classItem.department || !classItem.number || !classItem.teacher);
         setSubmitDisabled(areAnyInputsEmpty);
+
+        // Save classes to localStorage whenever they are updated
+        localStorage.setItem('classes', JSON.stringify(classes));
     }, [classes, numClasses]);
 
     const incrementClasses = () => {
@@ -52,11 +59,28 @@ const Form = () => {
         setIsSubmitted(true);
     };
 
+    const handleReset = () => {
+        setNumClasses(1);
+        setClasses([{ department: '', number: '', teacher: '' }]);
+        localStorage.removeItem('classes');
+        setIsSubmitted(false);
+    };
+
     // Conditionally render form or result
     if (isSubmitted) {
         return (
             <div className="result">
-                <h2>You are {screwedPercentage}% SCREWED!</h2>
+                <div className="percentage-box">
+                    <h2>You are {screwedPercentage}% SCREWED!</h2>
+                </div>
+
+                {/* Percentage Bar */}
+                <div className="percentage-bar-container">
+                    <div className="percentage-bar" style={{ width: `${screwedPercentage}%` }}>
+                        {screwedPercentage}%
+                    </div>
+                </div>
+
                 <h3>Class Details:</h3>
                 <div className="class-summary-container">
                     {classes.map((classItem, index) => (
@@ -65,10 +89,11 @@ const Form = () => {
                             <p><strong>Department:</strong> {classItem.department}</p>
                             <p><strong>Number:</strong> {classItem.number}</p>
                             <p><strong>Teacher:</strong> {classItem.teacher}</p>
-                            <p><strong>Difficulty Rating:</strong> {Math.floor(Math.random() * 100)}% (this will be fetched from API)</p> {/* For now, it's a random value */}
+                            <p><strong>Difficulty Rating:</strong> {Math.floor(Math.random() * 100)}% (this will be fetched from API)</p>
                         </div>
                     ))}
                 </div>
+                <button onClick={handleReset}>Reset</button>
             </div>
         );
     }
@@ -120,6 +145,9 @@ const Form = () => {
             <div className="button-container">
                 <button style={{ width: 'fit-content' }} onClick={handleSubmit} disabled={isSubmitDisabled}>
                     Submit
+                </button>
+                <button style={{ width: 'fit-content', marginLeft: '10px' }} onClick={handleReset}>
+                    Reset
                 </button>
             </div>
         </div>
