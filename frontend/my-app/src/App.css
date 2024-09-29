@@ -2,21 +2,23 @@
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
-  background-color: #191975; /* Light gray for background consistency */
+  background: linear-gradient(135deg, #1d2671, #c33764); /* Gradient background */
+  color: #ffffff;
 }
 
 /* Navbar Styles */
 .Navbar {
   width: 100%;
-  background: linear-gradient(90deg, #961313, #333); /* Consistent red to dark gradient */
+  background: rgba(0, 0, 0, 0.8); /* Transparent black background */
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 15px 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  padding: 20px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Add shadow to navbar */
   position: sticky;
   top: 0;
   z-index: 1000;
+  animation: slideDown 0.6s ease; /* Add animation on load */
 }
 
 /* Remove bullet points and align items horizontally */
@@ -34,8 +36,8 @@ body {
 
 /* Navbar Links */
 .app-nav-link {
-  color: #ffffff; /* Consistent white for text */
-  font-size: 18px;
+  color: #ffffff;
+  font-size: 1.2rem;
   font-weight: bold;
   text-decoration: none;
   padding: 10px 15px;
@@ -45,35 +47,34 @@ body {
 
 /* Hover Effect for Links */
 .app-nav-link:hover {
-  background-color: #ffae42; /* Consistent warm tone (orange) for hover */
-  color: #1f1f1f; /* Dark gray for hover text color */
+  background-color: #ffae42;
+  color: #1f1f1f;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transform: scale(1.05);
-  transition: all 0.4s ease;
-}
-
-/* Header Styles */
-.App-header {
-  text-align: center;
-  background-color: #282c34; /* Dark gray background for header */
-  color: #ffae42; /* Consistent orange for header text */
-  padding: 50px 0;
-}
-
-.App-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 30px;
+  transform: scale(1.1);
 }
 
 /* Footer Styles */
 .App-footer {
   text-align: center;
   padding: 20px;
-  background-color: #333; /* Consistent dark background */
-  color: #ffae42; /* Consistent orange for footer text */
+  background-color: rgba(0, 0, 0, 0.8); /* Dark background for footer */
+  color: #ffae42;
   position: sticky;
   bottom: 0;
   width: 100%;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 1s ease-in-out; /* Animation for footer */
+}
+
+/* Keyframes for Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100px); }
+  to { transform: translateY(0); }
 }
 
 /* Mobile Responsive */
@@ -85,7 +86,7 @@ body {
 
   .app-nav-link {
     padding: 12px;
-    font-size: 16px;
+    font-size: 1rem;
     margin: 10px 0;
   }
 }

@@ -19,14 +19,11 @@ function App() {
         </ul>
       </nav>
 
-      {/* Header and Main Content */}
-      <div className="App-header">
-        <h1>Welcome to Class Difficulty Rater</h1>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/form" element={<Form />} />
-        </Routes>
-      </div>
+      {/* Main Content */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/form" element={<Form />} />
+      </Routes>
 
       {/* Footer */}
       <footer className="App-footer">
