@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './Form.css';
 
 const Form = () => {
@@ -67,14 +68,7 @@ const Form = () => {
                     <h2>You are {screwedPercentage}% SCREWED!</h2>
                 </div>
 
-                <div className="percentage-bar-container">
-                    <div className="percentage-bar" style={{ width: `${screwedPercentage}%` }}>
-                        {screwedPercentage}%
-                    </div>
-                </div>
-
-                <h3>Class Details:</h3>
-                <div className="class-summary-container">
+                <div className="class-summary-grid">
                     {classes.map((classItem, index) => (
                         <div key={index} className="class-summary-box">
                             <h4>Class {index + 1}</h4>
@@ -85,20 +79,24 @@ const Form = () => {
                         </div>
                     ))}
                 </div>
-                <button onClick={handleReset}>Reset</button>
+
+                <div className="button-container">
+                    <button className="reset-button" onClick={handleReset}>Reset</button>
+                </div>
             </div>
         );
     }
 
     return (
         <div className="Form">
-            <h2>Input Your Classes</h2>
-            <div>
-                <button className="subtract-button" onClick={decrementClasses}>-</button>
+            <h2 className="header-text">number of classes this semester:</h2>
+            <div className="class-counter">
+                <button className="decrement-button" onClick={decrementClasses}>-</button>
                 <input type="text" readOnly value={numClasses} />
-                <button className="add-button" onClick={incrementClasses}>+</button>
+                <button className="increment-button" onClick={incrementClasses}>+</button>
             </div>
-            <table>
+
+            <TransitionGroup component="table" className="classes-table">
                 <thead>
                     <tr>
                         <th>Class Department (4 chars)</th>
@@ -108,37 +106,40 @@ const Form = () => {
                 </thead>
                 <tbody>
                     {classes.map((classItem, index) => (
-                        <tr key={index}>
-                            <td>
-                                <input
-                                    type="text"
-                                    value={classItem.department}
-                                    onChange={(e) => handleInputChange(index, 'department', e.target.value)}
-                                />
-                            </td>
-                            <td>
-                                <input
-                                    type="text"
-                                    value={classItem.number}
-                                    onChange={(e) => handleInputChange(index, 'number', e.target.value)}
-                                />
-                            </td>
-                            <td>
-                                <input
-                                    type="text"
-                                    value={classItem.teacher}
-                                    onChange={(e) => handleInputChange(index, 'teacher', e.target.value)}
-                                />
-                            </td>
-                        </tr>
+                        <CSSTransition key={index} timeout={300} classNames="fade">
+                            <tr>
+                                <td>
+                                    <input
+                                        type="text"
+                                        value={classItem.department}
+                                        onChange={(e) => handleInputChange(index, 'department', e.target.value)}
+                                    />
+                                </td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        value={classItem.number}
+                                        onChange={(e) => handleInputChange(index, 'number', e.target.value)}
+                                    />
+                                </td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        value={classItem.teacher}
+                                        onChange={(e) => handleInputChange(index, 'teacher', e.target.value)}
+                                    />
+                                </td>
+                            </tr>
+                        </CSSTransition>
                     ))}
                 </tbody>
-            </table>
+            </TransitionGroup>
+
             <div className="button-container">
-                <button style={{ width: 'fit-content' }} onClick={handleSubmit} disabled={isSubmitDisabled}>
+                <button className="submit-button" onClick={handleSubmit} disabled={isSubmitDisabled}>
                     Submit
                 </button>
-                <button style={{ width: 'fit-content', marginLeft: '10px' }} onClick={handleReset}>
+                <button className="reset-button" onClick={handleReset}>
                     Reset
                 </button>
             </div>
