@@ -8,10 +8,6 @@ function App() {
   // Function to handle input change for each class info (teacher name and class name)
   const handleInputChange = (index, e) => {
     const updatedClassInfo = [...classInfo];
-    updatedClassInfo[index] = {
-      ...updatedClassInfo[index],
-      [e.target.name]: e.target.value,
-    };
     setClassInfo(updatedClassInfo);
   };
 
