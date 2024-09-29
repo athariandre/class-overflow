@@ -73,10 +73,10 @@ def get_course_info():
         completion = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
-            {"role": "system", "content": "You are an assistant tasked with summarizing/cleaning data given to you and answering any prompts that may preface the data. You are specifically meant to identify any common issues that can be seen repeated throughout the posts"},
+            {"role": "system", "content": "I want you to infer the difficulty of the class using quotes from any of the posts. When quoting the posts, make sure to quote things directly and do not change the content of the quotes. Also, do NOT mention any quotes that specifically talk about a teacher, keep it strictly talking about the course itself. "},
         {
             "role": "user",
-            "content": f"Using the following data, create a short (less than 150 word) summary about {department} {course_code}. Specifically mention the difficulty of the course and whatever issues appeared frequently throughout the different texts: {(string_data + csv_string)}"
+            "content": f"I want you to infer the difficulty of the class using quotes from any of the posts. When quoting the posts, make sure to quote things directly and do not change the content of the quotes. Also, do NOT mention any quotes that specifically talk about a teacher, keep it strictly talking about the course itself: {department} {course_code} / {(string_data + csv_string)}"
         }
     ]
 )
