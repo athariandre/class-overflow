@@ -1,0 +1,146 @@
+/* General Styles */
+html, body {
+  height: 100%; /* Ensure the html and body fill the full height of the viewport */
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Flexbox for full-page layout */
+  justify-content: space-between; /* Space between content and footer */
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #003f5c, #00d9a3); /* New Gradient background */
+  color: #ffffff;
+  overflow-x: hidden; /* Hide any horizontal scrollbars */
+}
+
+body {
+  flex: 1; /* Body fills the remaining space */
+}
+
+/* Navbar Styles */
+.Navbar {
+  width: 100%;
+  background: linear-gradient(135deg, #003f5c, #00d9a3); /* Matching gradient background for both navbar and footer */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Add shadow to navbar */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  animation: slideDown 0.6s ease; /* Add animation on load */
+}
+
+/* Remove bullet points and align items horizontally */
+.app-nav-list {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar Items */
+.app-nav-item {
+  margin: 0 20px;
+}
+
+/* Navbar Links */
+.app-nav-link {
+  color: #ffffff; /* White text for navbar links */
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px 15px;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+
+/* Hover Effect for Links */
+.app-nav-link:hover {
+  background-color: #00b886; /* Darker green hover effect */
+  color: #003f5c;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transform: scale(1.1);
+}
+
+/* Main Content Area */
+main {
+  flex: 1; /* Ensures main content fills the space above the footer */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Footer Styles */
+.App-footer {
+  text-align: center;
+  padding: 30px 20px; /* Increase padding for better spacing */
+  background: linear-gradient(135deg, #003f5c, #00d9a3); /* Matching gradient background for both footer and navbar */
+  color: #ffffff; /* White text color for the footer */
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.4); /* Keep shadow for elevation */
+  animation: fadeIn 1s ease-in-out;
+  font-size: 1.1rem; /* Slightly larger font for readability */
+  letter-spacing: 1px; /* Add letter spacing for a cleaner look */
+  position: relative; /* Make sure footer sticks to bottom */
+  width: 100%;
+}
+
+/* Footer Content */
+.App-footer p {
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Footer Hover Effects */
+.App-footer p:hover {
+  color: #00d9a3; /* Green hover effect for footer text */
+  transition: color 0.3s ease;
+}
+
+/* Keyframes for Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100px); }
+  to { transform: translateY(0); }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .app-nav-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .app-nav-link {
+    padding: 12px;
+    font-size: 1rem;
+    margin: 10px 0;
+  }
+
+  .App-footer {
+    padding: 20px;
+    font-size: 1rem; /* Adjust text size for smaller screens */
+  }
+}
+/* Fade Transition Styles */
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
