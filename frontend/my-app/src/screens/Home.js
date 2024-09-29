@@ -1,9 +1,4 @@
-import React from 'react';
-
-// /c:/Users/Zayd Nadir/Documents/howdy-hack-project/howdy-hack-2024/frontend/my-app/src/screens/home.js
-
-
-// Removed duplicate Home component definition
+import React, { useState } from 'react';
 
 const styles = {
   container: {
@@ -12,57 +7,66 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     height: '100vh',
-    backgroundColor: '#282c34',
+    background: 'linear-gradient(135deg, #1d2671, #c33764)', // Vibrant gradient background
     color: '#ffffff',
     padding: '20px',
     textAlign: 'center',
   },
   header: {
-    fontSize: '3rem',
-    color: '#61dafb',
+    fontSize: '4rem',
+    color: '#fffa65', // Bright, engaging color
     marginBottom: '20px',
-    textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+    textShadow: '3px 3px 8px rgba(0, 0, 0, 0.6)', // Enhanced shadow effect
+    letterSpacing: '1px',
+  },
+  classText: {
+    fontWeight: 'normal', // Normal weight for "class"
+  },
+  overflowText: {
+    fontWeight: 'bold', // Bold for "overflow"
   },
   paragraph: {
     fontSize: '1.5rem',
-    color: '#adb5bd',
-    marginBottom: '30px',
-    maxWidth: '600px',
-    lineHeight: '1.6',
+    color: '#e0e0e0',
+    marginBottom: '40px',
+    maxWidth: '700px',
+    lineHeight: '1.8',
   },
   button: {
-    fontSize: '1.2rem',
+    fontSize: '1.5rem',
     color: '#ffffff',
     backgroundColor: '#61dafb',
     border: 'none',
-    padding: '10px 20px',
-    borderRadius: '5px',
+    padding: '15px 30px',
+    borderRadius: '30px', // Rounded button for a modern look
     cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
+    transition: 'all 0.4s ease',
+    boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.3)', // Soft shadow for depth
   },
   buttonHover: {
+    transform: 'scale(1.1)', // Enlarge button on hover
     backgroundColor: '#21a1f1',
+    boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.4)',
   },
-};
-
-const handleMouseEnter = (e) => {
-  e.target.style.backgroundColor = styles.buttonHover.backgroundColor;
-};
-
-const handleMouseLeave = (e) => {
-  e.target.style.backgroundColor = styles.button.backgroundColor;
 };
 
 const Home = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div style={styles.container}>
-      <h1 style={styles.header}>Welcome to ATHARIANDRE</h1>
-      <p style={styles.paragraph}>Here, we will ANDREATHARI</p>
+      <h1 style={styles.header}>
+        <span style={styles.classText}>class </span>
+        <span style={styles.overflowText}>overf10w</span>
+      </h1>
+      <p style={styles.paragraph}>
+        We’re here to help you experience the best of our platform with innovative technology and an incredible user experience.
+      </p>
       <button
-        style={styles.button}
+        style={isHovered ? { ...styles.button, ...styles.buttonHover } : styles.button}
         onClick={() => window.location.href = '/form'}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
         Go to Form
       </button>

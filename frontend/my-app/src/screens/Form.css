@@ -1,104 +1,106 @@
-@import url('https://fonts.googleapis.com/css2?family=Rye&display=swap');
-
+/* General Page Background */
 html, body {
     height: 100%; /* Cover the full height */
     margin: 0; /* Remove default margin */
     background-color: #987b55; /* Overall page background color */
-    font-family: 'Rye', serif; /* Optional: change the default font */
+    font-family: 'Rye', serif; /* Change the default font */
 }
 
+/* FORM CONTAINER */
 .Form {
     width: 100%;
-    max-width: 600px; /* Maximum width for the form */
-    margin: 0 auto; /* Center the form */
-    padding: 20px; /* Padding inside the form */
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
-    background: linear-gradient(45deg, #d39e58, #72380f);
-    border-radius: 30px; /* Rounded corners */
+    max-width: 900px; /* Increase maximum width for the form */
+    margin: 40px auto; /* Center the form and add top spacing */
+    padding: 30px; /* Increase padding for breathing room */
+    box-sizing: border-box; /* Include padding and border in total width/height */
+    background-color: #f4e1d2; /* Light background similar to the summary box */
+    border-radius: 30px; /* Keep the rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Add a soft shadow */
 }
 
+/* Heading Styles */
 .Form h2 {
     text-align: center; /* Center the heading */
-    margin-bottom: 20px; /* Spacing below the heading */
-    color: #ffffff;
+    margin-bottom: 30px; /* Spacing below the heading */
+    color: #000; /* Make heading black */
+    font-size: 2rem; /* Increase font size */
 }
 
+/* INPUT AREA FOR ADD/SUBTRACT BUTTONS */
 .Form div {
     display: flex; /* Flexbox for button and input alignment */
     justify-content: center; /* Center content */
+    align-items: center; /* Align buttons with input vertically */
     margin-bottom: 20px; /* Spacing below each input group */
 }
 
 .Form button {
-    width: 40px; /* Increased button width for better usability */
-    height: 40px; /* Increased button height for better usability */
+    width: 50px; /* Increased button width */
+    height: 50px; /* Increased button height */
     margin: 0 10px; /* Space between buttons */
-    border: 2px solid; /* Border around the buttons */
-    border-radius: 5px; /* Rounded button corners */
+    border: 2px solid #8B4513; /* Saddle Brown border */
+    border-radius: 10px; /* Softer, more rounded corners */
     cursor: pointer; /* Change cursor to pointer on hover */
-    transition: border-color 0.3s; /* Smooth border color transition */
-}
-
-/* Specific styles for add and subtract buttons */
-.Form .add-button, .Form .subtract-button {
-    /* ... */
-    border: 2px solid #8B4513; /* Saddle Brown */
     background-color: #D1B99A; /* Light sandy color */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Add some shadow for a 3D effect */
-    transition: all 0.3s; /* Smooth transition for all changes */
+    color: #8B4513; /* Darker text for contrast */
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3); /* Soft shadow for buttons */
+    font-size: 1.5rem; /* Increase button text size */
+    transition: all 0.3s ease; /* Smooth transition for changes */
 }
 
+/* HOVER AND ACTIVE STATES FOR BUTTONS */
+.Form button:hover {
+    background-color: #8B4513; /* Darken the button */
+    color: #FFF3E0; /* Lighter text color on hover */
+    transform: scale(1.05); /* Slight scale on hover */
+}
+
+.Form button:active {
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4); /* Change shadow on click */
+    transform: translateY(2px); /* Slight shift down */
+}
+
+/* CLASS COUNT INPUT */
 .Form input[type="text"] {
-    width: 50px; /* Width for the number of classes input */
-    text-align: center; /* Center text in input */
-    margin: 0 5px; /* Space around the input */
+    width: 70px; /* Increase width for class count input */
+    text-align: center; /* Center the text */
+    font-size: 1.2rem; /* Increase font size */
+    background-color: #FFF3E0; /* Light background for better visibility */
+    border: none; /* Remove border */
+    padding: 10px;
+    border-radius: 5px; /* Rounded corners */
+    color: #8B4513; /* Text color */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Soft shadow for input */
 }
 
+/* TABLE STYLES */
 .Form table {
     width: 100%; /* Full width for the table */
     border-collapse: collapse; /* Collapse borders for a cleaner look */
+    margin-bottom: 20px; /* Add space below table */
+    background-color: #FFF3E0; /* Light background for table */
+    border-radius: 10px;
+    overflow: hidden; /* Rounded corners for table */
 }
 
 .Form th, .Form td {
-    border: 1px solid #ddd; /* Light border for table cells */
-    padding: 8px; /* Padding inside table cells */
+    border: 1px solid #8B4513; /* Saddle Brown border for table */
+    padding: 12px; /* Padding inside table cells */
     text-align: left; /* Left-align text in table cells */
-}
-
-/* Change the color of the buttons on active (clicked) state */
-.Form .add-button:hover, .Form .subtract-button:hover {
-    /* Darken the button a bit when hovered */
-    background-color: #8B4513; /* Saddle Brown */
-    color: #D1B99A; /* Light sandy color */
-}
-
-.Form .add-button:active, .Form .subtract-button:active {
-    /* Push the button down a bit when clicked */
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    transform: translate(1px, 1px);
+    color: #3e2a14; /* Darker text color */
+    font-size: 1.2rem; /* Increase font size */
 }
 
 .Form th {
     background-color: #8B4513;
-    color: #ffffff; /* Header background color */
+    color: #ffffff; /* Header background and text color */
+    text-transform: uppercase; /* Uppercase headers */
+    letter-spacing: 1px; /* Letter spacing for readability */
 }
 
-/* Responsive input fields for class info */
-.Form input[type="text"] {
-    width: 100%; /* Full width for input fields */
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
-}
-
-input {
-    background-color: transparent;
-    border: 1px solid #000;
-    transition: all 0.3s ease;
-}
-
-input:focus {
-    outline: none;
-    border-color: #4A90E2;
-    box-shadow: 0 0 10px #4A90E2;
+/* FADE-IN ANIMATION FOR ROWS */
+.Form tr {
+    animation: rowFadeIn 0.5s ease;
 }
 
 @keyframes rowFadeIn {
@@ -106,6 +108,179 @@ input:focus {
     to { opacity: 1; transform: translateY(0); }
 }
 
-.Form tr {
-    animation: rowFadeIn 0.5s ease;
+/* FORM BUTTON CONTAINER */
+.Form .button-container {
+    display: flex;
+    justify-content: center; /* Center the submit button */
+    margin-top: 20px; /* Add space above the submit button */
+}
+
+.Form .button-container button {
+    background-color: #8B4513;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.Form .button-container button:hover {
+    background-color: #d39e58; /* Lighter brown for hover */
+    transform: scale(1.05); /* Slight scale on hover */
+}
+
+/* INPUT FOCUS STATES */
+input[type="text"]:focus {
+    outline: none;
+    border: 2px solid #4A90E2; /* Blue border on focus */
+    box-shadow: 0 0 10px #4A90E2;
+    background-color: #FFFBEA; /* Light background on focus */
+}
+
+/* RESPONSIVE INPUT FIELDS FOR CLASS INFO */
+.Form input[type="text"] {
+    width: 100%; /* Full width for input fields */
+    box-sizing: border-box; /* Include padding and border in total width */
+    padding: 12px; /* Increase padding inside input */
+    margin-top: 10px; /* Add some margin above inputs */
+    background-color: #FFF3E0; /* Light background */
+    border: 1px solid #8B4513; /* Brown border */
+    color: #3e2a14; /* Darker text color */
+    font-size: 1.2rem; /* Larger font for better readability */
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .Form {
+        padding: 15px; /* Adjust padding on mobile */
+    }
+
+    .Form button {
+        width: 40px; /* Slightly smaller buttons on mobile */
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .Form input[type="text"] {
+        width: 100%;
+    }
+}
+
+/* SUMMARY BOX STYLES */
+.result {
+    text-align: center;
+    margin: 20px auto;
+}
+
+/* Percentage Box */
+/* Percentage Box */
+/* Percentage Box */
+.percentage-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #b48461, #987b55); /* Gradient matching the background */
+    color: #ffffff; /* White text for better contrast */
+    padding: 25px;
+    margin: 20px auto;
+    border-radius: 30px; /* More rounded corners */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow for depth */
+    width: 75%; /* Make the box width 75% */
+    max-width: 600px;
+    text-align: center;
+    font-size: 1.8rem; /* Increase font size */
+    font-weight: bold; /* Emphasize the text */
+}
+
+/* Percentage Bar Container */
+.percentage-bar-container {
+    width: 75%; /* Width set to 75% of the screen */
+    margin: 20px auto;
+    background-color: #d1b99a; /* A lighter tone complementing the percentage box */
+    border-radius: 25px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center; /* Center the percentage bar content */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Percentage Bar */
+.percentage-bar {
+    height: 30px; /* Increased height for visibility */
+    background: linear-gradient(90deg, #d39e58, #b48461); /* Gradient from lighter brown to darker brown */
+    color: #ffffff;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center the text vertically */
+    line-height: 30px;
+    border-radius: 25px;
+    transition: width 0.5s ease;
+    font-weight: bold; /* Bold text */
+    font-size: 1.2rem; /* Larger font for readability */
+}
+
+
+/* Scrollable class summary */
+.class-summary-container {
+    display: flex;
+    flex-direction: column; /* Vertically stacked */
+    gap: 20px; /* Space between the boxes */
+    max-height: 400px; /* Set max-height for scrollable effect */
+    overflow-y: auto; /* Vertical scrolling */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f4f4f4; /* Light background color */
+}
+
+/* Scroll bar customization */
+.class-summary-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.class-summary-container::-webkit-scrollbar-track {
+    background: #e0e0e0;
+}
+
+.class-summary-container::-webkit-scrollbar-thumb {
+    background-color: #8B4513;
+    border-radius: 10px;
+}
+
+/* Summary box with hover effect */
+.class-summary-box {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    padding: 20px;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #000;
+    cursor: pointer;
+}
+
+.class-summary-box:hover {
+    transform: translateY(-10px); /* Lift on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* For smooth scrolling animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.class-summary-box {
+    animation: fadeInUp 0.5s ease;
 }

@@ -2,15 +2,21 @@ import React, { useState, useEffect } from 'react';
 import './Form.css';
 
 const Form = () => {
-    const [numClasses, setNumClasses] = useState(0);
-    const [classes, setClasses] = useState([]);
+    const initialClasses = JSON.parse(localStorage.getItem('classes')) || [{ department: '', number: '', teacher: '' }];
+    const initialNumClasses = initialClasses.length;
+
+    const [numClasses, setNumClasses] = useState(initialNumClasses);
+    const [classes, setClasses] = useState(initialClasses);
     const [isSubmitDisabled, setSubmitDisabled] = useState(true);
-    const [isSubmitted, setIsSubmitted] = useState(false); // New state to track if the form is submitted
-    const [screwedPercentage, setScrewedPercentage] = useState(70); // Default fixed percentage value
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [screwedPercentage, setScrewedPercentage] = useState(70);
 
     useEffect(() => {
         const areAnyInputsEmpty = numClasses === 0 || classes.some(classItem => !classItem.department || !classItem.number || !classItem.teacher);
         setSubmitDisabled(areAnyInputsEmpty);
+
+        // Save classes to localStorage whenever they are updated
+        localStorage.setItem('classes', JSON.stringify(classes));
     }, [classes, numClasses]);
 
     const incrementClasses = () => {
@@ -27,33 +33,59 @@ const Form = () => {
 
     const handleInputChange = (index, field, value) => {
         const newClasses = [...classes];
-        newClasses[index][field] = value;
+
+        if (field === 'department') {
+            newClasses[index][field] = value.slice(0, 4);
+        } else if (field === 'number') {
+            if (/^\d{0,3}$/.test(value)) {
+                newClasses[index][field] = value;
+            }
+        } else if (field === 'teacher') {
+            if (!/\s/.test(value)) {
+                newClasses[index][field] = value;
+            }
+        }
+
         setClasses(newClasses);
     };
 
     const handleSubmit = () => {
-        // Simulate an API call here in the future
-        // For now, set form as submitted
         setIsSubmitted(true);
     };
 
-    // Conditionally render form or result
+    const handleReset = () => {
+        setNumClasses(1);
+        setClasses([{ department: '', number: '', teacher: '' }]);
+        localStorage.removeItem('classes');
+        setIsSubmitted(false);
+    };
+
     if (isSubmitted) {
         return (
             <div className="result">
-                <h2>You are {screwedPercentage}% SCREWED!</h2>
+                <div className="percentage-box">
+                    <h2>You are {screwedPercentage}% SCREWED!</h2>
+                </div>
+
+                <div className="percentage-bar-container">
+                    <div className="percentage-bar" style={{ width: `${screwedPercentage}%` }}>
+                        {screwedPercentage}%
+                    </div>
+                </div>
+
                 <h3>Class Details:</h3>
-                <ul>
+                <div className="class-summary-container">
                     {classes.map((classItem, index) => (
-                        <li key={index}>
+                        <div key={index} className="class-summary-box">
                             <h4>Class {index + 1}</h4>
                             <p><strong>Department:</strong> {classItem.department}</p>
                             <p><strong>Number:</strong> {classItem.number}</p>
                             <p><strong>Teacher:</strong> {classItem.teacher}</p>
-                            <p><strong>Difficulty Rating:</strong> {Math.floor(Math.random() * 100)}% (this will be fetched from API)</p> {/* For now, it's a random value */}
-                        </li>
+                            <p><strong>Difficulty Rating:</strong> {Math.floor(Math.random() * 100)}%</p>
+                        </div>
                     ))}
-                </ul>
+                </div>
+                <button onClick={handleReset}>Reset</button>
             </div>
         );
     }
@@ -69,9 +101,9 @@ const Form = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>Class Department</th>
-                        <th>Class Number</th>
-                        <th>Teacher's Name</th>
+                        <th>Class Department (4 chars)</th>
+                        <th>Class Number (3 digits)</th>
+                        <th>Teacher's Last Name</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,6 +137,9 @@ const Form = () => {
             <div className="button-container">
                 <button style={{ width: 'fit-content' }} onClick={handleSubmit} disabled={isSubmitDisabled}>
                     Submit
+                </button>
+                <button style={{ width: 'fit-content', marginLeft: '10px' }} onClick={handleReset}>
+                    Reset
                 </button>
             </div>
         </div>
