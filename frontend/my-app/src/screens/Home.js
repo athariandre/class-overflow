@@ -49,7 +49,7 @@ const Home = () => {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.header}>Welcome to ATHARIANDRE</h1>
+      <h1 style={styles.header}>how screwed am i?</h1>
       <p style={styles.paragraph}>
         We’re here to help you experience the best of our platform with innovative technology and an incredible user experience.
       </p>
