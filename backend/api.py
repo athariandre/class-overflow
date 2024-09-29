@@ -25,7 +25,7 @@ def get_course_info():
         course_code = course['course_code']
         professor_name = course['professor_name']
 
-        [profGPA, exGPA] = getAverageGPA(department, course_code)
+        [profGPA, exGPA] = getAverageGPA(department, int(course_code))
         [RMP_rating, RMP_would_take_again, RMP_difficulty] = get_professor_stats(professor_name)
         RMP_would_take_again = int(RMP_would_take_again[1:])
         RMP_difficulty = float(RMP_difficulty)
