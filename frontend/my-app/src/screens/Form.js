@@ -3,7 +3,6 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './Form.css';
 
 const Form = () => {
-    // Initialize only with department, course_code, and professor_name
     const initialClasses = JSON.parse(localStorage.getItem('classes')) || [{ department: '', course_code: '', professor_name: '' }];
     const initialNumClasses = initialClasses.length;
 
@@ -11,22 +10,16 @@ const Form = () => {
     const [classes, setClasses] = useState(initialClasses);
     const [isSubmitDisabled, setSubmitDisabled] = useState(true);
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [screwedPercentage, setScrewedPercentage] = useState(null);
-    const [apiResults, setApiResults] = useState([]);
+    const [isLoading, setIsLoading] = useState(false); // New state for loading
+    const [results, setResults] = useState([]);
 
-    // Clear old localStorage and ensure only valid fields are stored
     useEffect(() => {
-        // TEMPORARY: Clear all storage for debugging
-        localStorage.clear(); // Clear everything in localStorage
-        console.log('All storage cleared!');
-    
         const areAnyInputsEmpty = numClasses === 0 || classes.some(classItem => !classItem.department || !classItem.course_code || !classItem.professor_name);
         setSubmitDisabled(areAnyInputsEmpty);
-    
+
         // Save classes to localStorage whenever they are updated
         localStorage.setItem('classes', JSON.stringify(classes));
     }, [classes, numClasses]);
-    
 
     const incrementClasses = () => {
         setNumClasses(numClasses + 1);
@@ -42,26 +35,14 @@ const Form = () => {
 
     const handleInputChange = (index, field, value) => {
         const newClasses = [...classes];
-
-        if (field === 'department') {
-            newClasses[index][field] = value.slice(0, 4);
-        } else if (field === 'course_code') {
-            if (/^\d{0,3}$/.test(value)) {  // Only allow up to 3 digits
-                newClasses[index][field] = value;
-            }
-        } else if (field === 'professor_name') {
-            if (!/\s/.test(value)) {  // Ensure no spaces in the professor name
-                newClasses[index][field] = value;
-            }
-        }
-
+        newClasses[index][field] = value;
         setClasses(newClasses);
     };
 
     const handleSubmit = async () => {
-        setIsSubmitted(true);
-        console.log('Submitted:', JSON.stringify(classes));
+        setIsLoading(true); // Show loading screen
         try {
+            console.log('Submitting data:', classes);
             const response = await fetch('http://127.0.0.1:8000/api/course_info', {
                 method: 'POST',
                 headers: {
@@ -69,37 +50,48 @@ const Form = () => {
                 },
                 body: JSON.stringify(classes),
             });
-
+    
             if (response.ok) {
                 const data = await response.json();
-                setApiResults(data);
-                setScrewedPercentage(data.reduce((total, course) => total + course.screw_percentage, 0) / data.length);
+                console.log('Received data:', data);  // Debug: Log received data
+                setResults(data);
+                setIsSubmitted(true);
             } else {
-                console.error('Failed to fetch course info');
+                console.error('Failed to fetch course info', response.statusText);  // Log error message
             }
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error:', error);  // Log network or other errors
+        } finally {
+            setIsLoading(false); // Hide loading screen
         }
     };
+    
 
     const handleReset = () => {
         setNumClasses(1);
         setClasses([{ department: '', course_code: '', professor_name: '' }]);
         localStorage.removeItem('classes');
         setIsSubmitted(false);
-        setScrewedPercentage(null);
-        setApiResults([]);
+        setResults([]);
+        setIsLoading(false); // Reset loading state
     };
 
-    if (isSubmitted && apiResults.length > 0) {
+    // Loading screen UI
+    if (isLoading) {
+        return (
+            <div className="loading-screen">
+                <div className="spinner"></div>
+                <h2>Loading results, please wait...</h2>
+            </div>
+        );
+    }
+
+    if (isSubmitted) {
         return (
             <div className="result">
-                <div className="percentage-box">
-                    <h2>You are {screwedPercentage?.toFixed(2)}% SCREWED!</h2>
-                </div>
-
+                <h2>Results</h2>
                 <div className="class-summary-grid">
-                    {apiResults.map((result, index) => (
+                    {results.map((result, index) => (
                         <div key={index} className="class-summary-box">
                             <h4>Class {index + 1}</h4>
                             <p><strong>Department:</strong> {result.department}</p>
@@ -108,13 +100,11 @@ const Form = () => {
                             <p><strong>Class Difficulty:</strong> {result.class_difficulty}</p>
                             <p><strong>Professor Difficulty:</strong> {result.professor_difficulty}</p>
                             <p><strong>Reddit Summary:</strong> {result.reddit_summary}</p>
+                            <p><strong>Screw Percentage:</strong> {result.screw_percentage}%</p>
                         </div>
                     ))}
                 </div>
-
-                <div className="button-container">
-                    <button className="reset-button" onClick={handleReset}>Reset</button>
-                </div>
+                <button className="reset-button" onClick={handleReset}>Reset</button>
             </div>
         );
     }
@@ -132,7 +122,7 @@ const Form = () => {
                 <thead>
                     <tr>
                         <th>Class Department (4 chars)</th>
-                        <th>Course Code (3 digits)</th>
+                        <th>Class Number (3 digits)</th>
                         <th>Professor's Last Name</th>
                     </tr>
                 </thead>
