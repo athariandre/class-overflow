@@ -57,7 +57,7 @@ const Form = () => {
         setIsLoading(true); // Show loading screen
         try {
             console.log('Submitting data:', classes);
-            const response = await fetch('http://127.0.0.1:8000/api/course_info', {
+            const response = await fetch('http://127.0.0.1:5000/api/course_info', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ const Form = () => {
 
     return (
         <div className="Form">
-            <h2 className="header-text">Number of classes this semester:</h2>
+            <h2 className="header-text">number of classes this semester:</h2>
             <div className="class-counter">
                 <button className="decrement-button" onClick={decrementClasses}>-</button>
                 <input type="text" readOnly value={numClasses} />
