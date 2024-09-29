@@ -56,8 +56,8 @@ const Form = () => {
     const handleSubmit = async () => {
         setIsLoading(true); // Show loading screen
         try {
-            console.log('Submitting data:', classes);  // Debug: Log data being sent
-            const response = await fetch('http://127.0.0.1:5000/api/course_info', {
+            console.log('Submitting data:', classes);
+            const response = await fetch('http://127.0.0.1:8000/api/course_info', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
