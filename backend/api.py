@@ -15,7 +15,7 @@ client = OpenAI()
 
 
 
-@app.route('/api/course_info', methods=['GET'])
+@app.route('/api/course_info', methods=['POST'])
 def get_course_info():
     courses = request.json
     results = []
