@@ -1,90 +1,89 @@
-import React, { useState } from 'react';
-//import './Form.css'; // Assuming you have some CSS to make it fancy
+import React, { useState, useEffect } from 'react';
+import './Form.css';
 
 const Form = () => {
-    const [step, setStep] = useState(1);
     const [numClasses, setNumClasses] = useState(0);
     const [classes, setClasses] = useState([]);
+    const [isSubmitDisabled, setSubmitDisabled] = useState(true);
 
-    const handleNumClassesChange = (e) => {
-        const value = e.target.value === '' ? 0 : parseInt(e.target.value, 10);
-        setNumClasses(value);
-        setClasses(Array.from({ length: value }, () => ({ professor: '', department: '', courseNumber: '' })));
+    useEffect(() => {
+        const areAnyInputsEmpty = numClasses === 0 || classes.some(classItem => !classItem.department || !classItem.number || !classItem.teacher);
+        setSubmitDisabled(areAnyInputsEmpty);
+    }, [classes, numClasses]);
+
+    const incrementClasses = () => {
+        setNumClasses(numClasses + 1);
+        setClasses([...classes, { department: '', number: '', teacher: '' }]);
     };
 
-    const handleClassChange = (index, field, value) => {
+    const decrementClasses = () => {
+        if (numClasses > 0) {
+            setNumClasses(numClasses - 1);
+            setClasses(classes.slice(0, -1));
+        }
+    };
+
+    const handleInputChange = (index, field, value) => {
         const newClasses = [...classes];
-        newClasses[index] = { ...newClasses[index], [field]: value };
+        newClasses[index][field] = value;
         setClasses(newClasses);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Store the classes data for future use
-        console.log(classes);
-    };
-
-    const handleNextStep = () => {
-        setStep(step + 1);
+    const handleSubmit = () => {
+        // Perform submit logic here
+        console.log('Form submitted:', classes);
+        // Redirect to the next page or perform any other action
     };
 
     return (
-        <div className="fancy-form-container">
-            {step === 1 && (
-                <div className="prompt">
-                    <h2>Enter Number of Classes</h2>
-                    <div className="form-group">
-                        <label>Number of Classes:</label>
-                        <input
-                            type="number"
-                            value={numClasses}
-                            onChange={handleNumClassesChange}
-                            className="form-control"
-                        />
-                    </div>
-                    <button onClick={handleNextStep} className="next-button">Next</button>
-                </div>
-            )}
-            {step === 2 && (
-                <form onSubmit={handleSubmit} className="fancy-form">
-                    <h2>Enter Your Class Schedule</h2>
+        <div className="Form">
+            <h2>Input Your Classes</h2>
+            <div>
+                <button className="subtract-button" onClick={decrementClasses}>-</button>
+                <input type="text" readOnly value={numClasses} />
+                <button className="add-button" onClick={incrementClasses}>+</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Class Department</th>
+                        <th>Class Number</th>
+                        <th>Teacher's Name</th>
+                    </tr>
+                </thead>
+                <tbody>
                     {classes.map((classItem, index) => (
-                        <div key={index} className="class-group">
-                            <h3>Class {index + 1}</h3>
-                            <div className="form-group">
-                                <label>Professor Name:</label>
-                                <input
-                                    type="text"
-                                    value={classItem.professor}
-                                    onChange={(e) => handleClassChange(index, 'professor', e.target.value)}
-                                    className="form-control"
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Department Code (4 letters):</label>
+                        <tr key={index}>
+                            <td>
                                 <input
                                     type="text"
                                     value={classItem.department}
-                                    onChange={(e) => handleClassChange(index, 'department', e.target.value)}
-                                    className="form-control"
-                                    maxLength="4"
+                                    onChange={(e) => handleInputChange(index, 'department', e.target.value)}
                                 />
-                            </div>
-                            <div className="form-group">
-                                <label>Course Number (3 digits):</label>
+                            </td>
+                            <td>
                                 <input
                                     type="text"
-                                    value={classItem.courseNumber}
-                                    onChange={(e) => handleClassChange(index, 'courseNumber', e.target.value)}
-                                    className="form-control"
-                                    maxLength="3"
+                                    value={classItem.number}
+                                    onChange={(e) => handleInputChange(index, 'number', e.target.value)}
                                 />
-                            </div>
-                        </div>
+                            </td>
+                            <td>
+                                <input
+                                    type="text"
+                                    value={classItem.teacher}
+                                    onChange={(e) => handleInputChange(index, 'teacher', e.target.value)}
+                                />
+                            </td>
+                        </tr>
                     ))}
-                    <button type="submit" className="submit-button">Submit</button>
-                </form>
-            )}
+                </tbody>
+            </table>
+            <div className="button-container">
+                <button style={{ width: 'fit-content' }} onClick={handleSubmit} disabled={isSubmitDisabled}>
+                    Submit
+                </button>
+            </div>
         </div>
     );
 };
