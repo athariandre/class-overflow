@@ -5,7 +5,6 @@ import pickle
 from prawcore.exceptions import PrawcoreException
 
 def my_function(class_category, class_number):
-
     # Replace these with your actual Reddit API credentials
     CLIENT_ID = "o1zUMm31nXxoAKs7eq0Rwg"
     CLIENT_SECRET = "Dw4KWywdFsE9xeprRUHtAres7vx7PA"
@@ -20,13 +19,12 @@ def my_function(class_category, class_number):
 
     # Specify the subreddit
     subreddit_name = "aggies"
-    found_posts = 0
-    total_posts_checked = 0
     post_bodies = []  # Array to store post bodies
 
     def scrape_subreddit(subreddit, class_category, class_number):
-        global found_posts, total_posts_checked
-        
+        total_posts_checked = 0
+        found_posts = 0
+
         with open("filtered_reddit_posts.csv", mode="w", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)
             writer.writerow(["Title", "Score", "URL", "Number of Comments", "Created UTC", "Body"])
@@ -45,11 +43,13 @@ def my_function(class_category, class_number):
 
                 # Sleep to avoid hitting rate limits
                 time.sleep(0.1)
+        
+        return total_posts_checked, found_posts
 
     def check_and_write_submission(submission, writer, class_category, class_number):
         body_text = submission.selftext.lower()
         
-        if class_category in body_text and class_number in body_text:
+        if class_category.lower() in body_text and class_number.lower() in body_text:
             writer.writerow([
                 submission.title,
                 submission.score,
@@ -65,7 +65,7 @@ def my_function(class_category, class_number):
     # Main execution
     try:
         subreddit = reddit.subreddit(subreddit_name)
-        scrape_subreddit(subreddit, class_category, class_number)
+        total_posts_checked, found_posts = scrape_subreddit(subreddit, class_category, class_number)
 
         print(f"\nTotal posts checked: {total_posts_checked}")
         print(f"Total matching posts found: {found_posts}")
@@ -86,3 +86,5 @@ def my_function(class_category, class_number):
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
+
+my_function("CSCE", "120")
