@@ -11,9 +11,8 @@ options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-
-def getInfo(department, number, prof):
+def getInfo(department, number, professor):
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     url = f"https://anex.us/grades/?dept={department}&number={number}"
     driver.get(url)
 
@@ -25,9 +24,32 @@ def getInfo(department, number, prof):
     soup = BeautifulSoup(html, 'html.parser')
 
     # Example: Find all table rows
-    rows = soup.find_all('tr')
+    chart_div = soup.find('div', id='chartDiv')
+    table_div = soup.find('div', id='tableDiv')
+    if(chart_div.text == "No data returned. Is your input correct?"):
+        return[-1, -1]
+    rows = table_div.find_all('tr') if table_div else []
+    gpasum = 0.0
+    totalsum = 0.0
+    cnt = 0
+    gpacnt = 0
     for row in rows:
-        if prof in row.text:
-            print(row.text)
+        if(row.text[0] == "Y"):
+            continue
+        decimalidx = row.text.index(".")
+        if professor.lower() in row.text.lower():
+            gpasum += float(row.text[decimalidx-1:decimalidx+3])
+            gpacnt += 1
+        else:
+            totalsum += float(row.text[decimalidx-1:decimalidx+3])
+            cnt+=1
+    target_avg_gpa = (float)(gpasum/gpacnt)
+    other_avg_gpa = (float)(totalsum/cnt)
+    return[target_avg_gpa, other_avg_gpa]
 
-getInfo()
+# dep = input("Enter department: ")
+# num = int(input("Enter class number: "))
+# prof = input("Enter professor last name: ")
+
+
+
