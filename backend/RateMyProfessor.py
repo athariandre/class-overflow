@@ -4,7 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 
-def get_professor_details(professor_name):
+def get_professor_stats(professor_name):
     # Initialize the WebDriver (Make sure to replace with the path to your WebDriver if necessary)
     driver = webdriver.Chrome()
 
@@ -78,7 +78,3 @@ def get_professor_details(professor_name):
         print(f"An error occurred: {e}")
         driver.quit()  # Ensure the driver is closed in case of an error
         return None
-
-# Example usage
-professor_name = "Shawn Lupoli"
-print(get_professor_details(professor_name))

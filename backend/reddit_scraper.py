@@ -4,7 +4,7 @@ import time
 import pickle
 from prawcore.exceptions import PrawcoreException
 
-def my_function(class_category, class_number):
+def class_reddit_scrape(class_category, class_number):
     # Replace these with your actual Reddit API credentials
     CLIENT_ID = "o1zUMm31nXxoAKs7eq0Rwg"
     CLIENT_SECRET = "Dw4KWywdFsE9xeprRUHtAres7vx7PA"
@@ -85,6 +85,3 @@ def my_function(class_category, class_number):
         print("This might be due to rate limiting or authentication issues.")
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
-
-
-my_function("CSCE", "120")
