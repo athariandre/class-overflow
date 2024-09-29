@@ -3,6 +3,7 @@ import React from 'react';
 // /c:/Users/Zayd Nadir/Documents/howdy-hack-project/howdy-hack-2024/frontend/my-app/src/screens/home.js
 
 
+// Removed duplicate Home component definition
 
 const styles = {
   container: {
