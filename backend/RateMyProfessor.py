@@ -54,7 +54,8 @@ def get_professor_stats(professor_name):
             return None
 
         # Extract the "would take again" percentage
-        would_take_again = soup.find('div', class_='FeedbackItem__FeedbackNumber-uof32n-1 kkESWs')
+        ratingslist = soup.findAll('div', class_='FeedbackItem__FeedbackNumber-uof32n-1 kkESWs')
+        would_take_again = ratingslist[0]
         if would_take_again:
             would_take_again1 = would_take_again.text.strip()
             print(f"Would Take Again: {would_take_again1}")
@@ -64,7 +65,7 @@ def get_professor_stats(professor_name):
             return None
 
         # Extract the level of difficulty
-        difficulty = soup.find('div', class_='FeedbackItem__FeedbackNumber-uof32n-1 kkESWs')
+        difficulty = ratingslist[1]
         if difficulty:
             difficulty1 = difficulty.text.strip()
             print(f"Difficulty: {difficulty1}")

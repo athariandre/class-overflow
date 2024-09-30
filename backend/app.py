@@ -43,18 +43,18 @@ def get_course_info():
 
 
 
-        RMP_would_take_again = float(RMP_would_take_again[:2]) / 100.0
-        RMP_difficulty = float(RMP_difficulty[:2]) # 0-5
+        RMP_would_take_again = float(RMP_would_take_again[:2]) #0-100
+        # RMP_difficulty = float(RMP_difficulty[:2]) # 0-5 DEPRECATED !!!!
         RMP_rating = float(RMP_rating) #0-5
         profGPA = float(profGPA) #0-4
         exGPA = float(exGPA) #0-4
 
-        w1 = 0.4
-        w2 = 0.15
-        w3 = 0.15
-        w4 = 0.3
+        w1 = 0.5
+        w2 = 0.25
+        w3 = 0.25
+        # w4 = 0.3
 
-        class_diff_score = (w1*((4-exGPA) / 4.0) + w2*(1 - (RMP_rating / 5.0)) + w3*(1-(RMP_would_take_again / 100.0)) + w4*(RMP_difficulty / 5.0)) * 10000
+        class_diff_score = (w1*((4-exGPA) / 4.0) + w2*(1 - (RMP_rating / 5.0)) + w3*(1-(RMP_would_take_again / 100.0))) * 53 # +  w4*(RMP_difficulty / 5.0)) * 100
         prof_diff_index = 1 - ((profGPA - exGPA) / (exGPA)) # ex. profGPA 4 exGPA 3 diffIdx = 0.75 so 75% as hard
         prof_diff_index*=prof_diff_index
         prof_diff_index*=prof_diff_index

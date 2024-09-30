@@ -120,7 +120,7 @@ const Form = () => {
                             <p><strong>Course Code:</strong> {result.course_code}</p>
                             <p><strong>Professor:</strong> {result.professor_name}</p>
                             <p><strong>Class Difficulty:</strong> {result.class_difficulty}</p>
-                            <p><strong>Professor Difficulty:</strong> {result.professor_difficulty}</p>
+                            <p><strong>Professor Difficulty Multiplier:</strong> {result.professor_difficulty}</p>
                             <p><strong>Reddit Summary:</strong> {result.reddit_summary}</p>
                             <p><strong>Screw Percentage:</strong> {result.screw_percentage}%</p>
                         </div>
