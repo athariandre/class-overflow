@@ -222,3 +222,6 @@ table input[type="text"]:hover {
     transform: translateY(-20px);
     transition: opacity 300ms ease-out, transform 300ms ease-out;
 }
+.header-text {
+    color: black
+}
