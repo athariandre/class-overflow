@@ -1,5 +1,7 @@
 # { class overflow },  a HowdyHack 2024 project
-Howdy! Welcome to our HowdyHack submission! Our app will be hosted soon so check back for updates.
+Howdy! Welcome to our HowdyHack submission! Video submission --> https://drive.google.com/file/d/1UDA33vHEmDO4d9G6zYuEDTTl-jZYapq5/view?usp=sharing
+
+*App will be posted soon; dependent on Reddit + OpenAI keys so might publish with ability to submit those
 
 ## Inspiration
 Our inspiration for this project was mostly due to the fact that during the course selection process there's usually a lot of juggling between looking at grade distributions, scouring the reddit, and also checking Rate My Professor for every single professor for every single class you are planning to take. To expedite this, we created { class overflow } that can do this for the students through our own webscraping for these sites.
